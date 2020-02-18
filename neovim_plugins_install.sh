@@ -13,6 +13,8 @@ mkdir nvim
 cd nvim
 mkdir site
 cd site
+mkdir pack
+cd pack
 mkdir plugins
 cd plugins
 mkdir start
