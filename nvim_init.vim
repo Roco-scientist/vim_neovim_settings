@@ -9,7 +9,8 @@ set expandtab
 set smarttab
 set tabstop=4
 set shiftwidth=4
-set textwidth=79
+set textwidth=120
+set termguicolors
 let g:deoplete#enable_at_startup = 1
 colorscheme gruvbox
 let g:jedi#popup_on_dot = 0
