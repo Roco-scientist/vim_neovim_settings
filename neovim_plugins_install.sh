@@ -25,6 +25,7 @@ git clone https://github.com/davidhalter/jedi-vim.git
 git clone https://github.com/Shougo/deoplete.nvim.git
 git clone --recursive https://github.com/deoplete-plugins/deoplete-jedi
 git clone https://github.com/morhetz/gruvbox.git
+git clone https://github.com/honza/vim-snippets.git
 git clone https://github.com/SirVer/ultisnips.git
 cd ~
 cp ./vim_neovim_settings/nvim_init.vim ./.config/nvim/init.vim
