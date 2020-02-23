@@ -16,4 +16,5 @@ cd -
 pip install jedi
 pip install yapf
 pip install --user --upgrade pynvim
+pip install --user neovim
 
