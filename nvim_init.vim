@@ -12,7 +12,6 @@ set shiftwidth=4
 set textwidth=120
 set termguicolors
 let g:netrw_banner = 0
-let g:netrw_browse_split = 1
 let g:netrw_liststyle = 3
 let g:deoplete#enable_at_startup = 1
 colorscheme gruvbox
