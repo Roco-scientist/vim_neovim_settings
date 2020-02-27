@@ -1,4 +1,4 @@
-let g:python3_host_prog = '/Users/rorycoffey/anaconda3/bin/python'
+let g:python3_host_prog = '$HOME/anaconda3/bin/python'
 inoremap jk <ESC>
 let mapleader = " "
 filetype plugin indent on
