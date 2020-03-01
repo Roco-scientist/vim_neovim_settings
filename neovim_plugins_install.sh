@@ -12,6 +12,7 @@ git clone --recursive https://github.com/deoplete-plugins/deoplete-jedi
 git clone https://github.com/morhetz/gruvbox.git
 git clone https://github.com/honza/vim-snippets.git
 git clone https://github.com/SirVer/ultisnips.git
+https://github.com/tpope/vim-fugitive.git
 cd -
 pip install jedi
 pip install yapf
