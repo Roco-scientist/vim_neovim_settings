@@ -3,7 +3,7 @@ inoremap jk <ESC>
 let mapleader = " "
 filetype plugin indent on
 set encoding=utf-8
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 set nowrap
 set autoindent
 set expandtab
