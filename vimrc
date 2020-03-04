@@ -25,6 +25,8 @@ set foldenable
 set foldlevelstart=10
 set foldnestmax=10
 noremap <leader>a za
+noremap <leader>o zO                                                                                                                                                                                    
+noremap <leader>c zC
 set foldmethod=indent
 
 " split settings
