@@ -13,6 +13,8 @@ git clone https://github.com/SirVer/ultisnips.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/vim-airline/vim-airline.git
+git clone https://github.com/dense-analysis/ale.git
+git clone https://github.com/nvie/vim-flake8.git
 cd -
 pip install jedi
 pip install yapf
