@@ -20,5 +20,4 @@ git clone https://github.com/nvie/vim-flake8.git
 cd -
 pip install jedi
 pip install yapf
-pip install --user --upgrade pynvim
-pip install --user neovim
+pip install flake8
