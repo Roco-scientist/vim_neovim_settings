@@ -1,5 +1,7 @@
 #! /usr/bin/bash
 
+cp pep8 ~/.config
+cp flake8 ~/.config
 cp vimrc ~/.vimrc
 mkdir -p ~/.vim/pack/shapeshed/start/
 cd ~/.vim/pack/shapeshed/start/
@@ -19,5 +21,5 @@ git clone https://github.com/tell-k/vim-autopep8.git
 cd -
 pip install jedi
 pip install yapf
-pip install flake8
+pip install --user flake8
 pip install --user autopep8

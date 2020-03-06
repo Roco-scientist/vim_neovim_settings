@@ -2,6 +2,8 @@
 
 mkdir -p ~/.config/nvim/
 cp nvim_init.vim ~/.config/nvim/init.vim
+cp pep8 ~/.config
+cp flake8 ~/.config
 mkdir -p ~/.local/share/nvim/site/pack/plugins/start
 cd ~/.local/share/nvim/site/pack/plugins/start
 git clone https://github.com/ervandew/supertab.git
@@ -21,7 +23,7 @@ https://github.com/tell-k/vim-autopep8.git
 cd -
 pip install jedi
 pip install yapf
-pip install flake8
+pip install --user flake8
 pip install neovim
 pip install pynvim
 pip install --user autopep8
