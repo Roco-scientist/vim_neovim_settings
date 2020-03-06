@@ -20,4 +20,4 @@ cd -
 pip install jedi
 pip install yapf
 pip install flake8
-pip install autopep8
+pip install --user autopep8
