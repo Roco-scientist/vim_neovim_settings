@@ -53,7 +53,7 @@ let g:UltiSnipsUsePythonVersion = 3
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ale setup
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['flake8', 'mypy']}
 let g:ale_fixers = {'python': ['autopep8']}
 let g:ale_warn_about_trailing_whitespace = 0
 noremap <leader>f :ALEFix<CR> 
