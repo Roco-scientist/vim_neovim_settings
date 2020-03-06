@@ -1,5 +1,5 @@
 " set python location
-let g:python3_host_prog = $HOME'/anaconda3/bin/python'
+let g:python3_host_prog = $HOME . '/anaconda3/bin/python'
 
 " remapping settings: exit, window movement
 let mapleader = " "
