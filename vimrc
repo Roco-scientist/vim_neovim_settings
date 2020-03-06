@@ -1,10 +1,12 @@
-" common settings
+" remapping: exit, window change
 let mapleader = " "
 inoremap jk <ESC>
 noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
 noremap <leader>l <c-w>l
 noremap <leader>h <c-w>h
+
+" format settings
 filetype plugin indent on
 set encoding=utf-8
 set clipboard^=unnamed,unnamedplus
