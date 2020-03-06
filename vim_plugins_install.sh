@@ -15,8 +15,9 @@ git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/vim-airline/vim-airline.git
 git clone https://github.com/dense-analysis/ale.git
 git clone https://github.com/nvie/vim-flake8.git
+git clone https://github.com/tell-k/vim-autopep8.git
 cd -
 pip install jedi
 pip install yapf
-pip install --user --upgrade pynvim
 pip install flake8
+pip install autopep8
