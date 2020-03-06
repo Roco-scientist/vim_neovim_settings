@@ -21,7 +21,7 @@ https://github.com/tell-k/vim-autopep8.git
 cd -
 pip install jedi
 pip install yapf
-pip install flake8
+pip install --user flake8
 pip install neovim
 pip install pynvim
 pip install --user autopep8
