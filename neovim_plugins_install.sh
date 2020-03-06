@@ -24,4 +24,4 @@ pip install yapf
 pip install flake8
 pip install neovim
 pip install pynvim
-pip install autopep8
+pip install --user autopep8
