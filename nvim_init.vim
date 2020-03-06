@@ -1,13 +1,15 @@
 " set python location
 let g:python3_host_prog = '$HOME/anaconda3/bin/python'
 
-" common settings
+" remapping settings: exit, window movement
 let mapleader = " "
 inoremap jk <ESC>
 noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
 noremap <leader>l <c-w>l
 noremap <leader>h <c-w>h
+
+" format settings
 filetype plugin indent on
 set encoding=utf-8
 set clipboard^=unnamed,unnamedplus
