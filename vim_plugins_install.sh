@@ -18,8 +18,10 @@ git clone https://github.com/vim-airline/vim-airline.git
 git clone https://github.com/dense-analysis/ale.git
 git clone https://github.com/nvie/vim-flake8.git
 git clone https://github.com/tell-k/vim-autopep8.git
+git clone https://github.com/Integralist/vim-mypy.git
 cd -
 pip install jedi
 pip install yapf
 pip install --user flake8
 pip install --user autopep8
+sudo apt-get install mypy
