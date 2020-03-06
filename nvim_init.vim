@@ -50,7 +50,7 @@ let g:netrw_liststyle = 3
 let g:deoplete#enable_at_startup = 1
 colorscheme gruvbox
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" ultisnips configuration
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
