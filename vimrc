@@ -47,14 +47,14 @@ let g:netrw_liststyle = 3
 " plugin settings
 colorscheme gruvbox
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" ultisnips configuration
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsUsePythonVersion = 3
 
-" supertab tab down
+" supertab: tab down
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ale setup
