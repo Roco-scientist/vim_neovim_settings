@@ -14,12 +14,15 @@ set clipboard^=unnamed,unnamedplus
 set nowrap
 set number
 set cursorline
-set autoindent
-set expandtab
 set smarttab
-set tabstop=4
-set shiftwidth=4
-set textwidth=100
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=100
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
 if has("termguicolors")
   set termguicolors
 endif
