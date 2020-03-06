@@ -20,7 +20,9 @@ set smarttab
 set tabstop=4
 set shiftwidth=4
 set textwidth=100
-set termguicolors
+if has("termguicolors")
+  set termguicolors
+endif
 
 " code folding
 set foldenable
@@ -52,3 +54,8 @@ let g:UltiSnipsUsePythonVersion = 3
 
 " supertab tab down
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" ale setup
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_fixers = {'python': ['autopep8']}
+let g:ale_warn_about_trailing_whitespace = 0
