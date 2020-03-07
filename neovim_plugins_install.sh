@@ -19,7 +19,7 @@ git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/dense-analysis/ale.git
 git clone https://github.com/nvie/vim-flake8.git
-git colne https://github.com/tell-k/vim-autopep8.git
+git clone https://github.com/tell-k/vim-autopep8.git
 git clone https://github.com/Integralist/vim-mypy.git
 cd -
 pip install jedi
