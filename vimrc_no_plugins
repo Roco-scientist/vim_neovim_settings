@@ -1,5 +1,5 @@
 " remapping: exit, window change
-let mapleader = " "
+let mapleader = <space>
 inoremap jk <ESC>
 noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
