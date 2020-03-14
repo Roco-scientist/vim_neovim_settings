@@ -2,7 +2,7 @@
 let g:python3_host_prog = $HOME . '/anaconda3/bin/python'
 
 " remapping settings: exit, window movement
-let mapleader = " "
+let mapleader = <space>
 inoremap jk <ESC>
 noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
