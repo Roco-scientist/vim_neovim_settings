@@ -21,6 +21,8 @@ git clone https://github.com/dense-analysis/ale.git
 git clone https://github.com/nvie/vim-flake8.git
 git clone https://github.com/tell-k/vim-autopep8.git
 git clone https://github.com/Integralist/vim-mypy.git
+git clone https://github.com/rust-lang/rust.vim.git
+git clone https://github.com/sebastianmarkow/deoplete-rust.git
 cd -
 pip install jedi
 pip install yapf

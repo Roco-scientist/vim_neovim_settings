@@ -2,7 +2,7 @@
 let g:python3_host_prog = $HOME . '/anaconda3/bin/python'
 
 " remapping settings: exit, window movement
-let mapleader = <space>
+let mapleader = " "
 inoremap jk <ESC>
 noremap <leader>j <c-w>j
 noremap <leader>k <c-w>k
@@ -66,3 +66,11 @@ let g:ale_linters = {'python': ['flake8', 'mypy']}
 let g:ale_fixers = {'python': ['autopep8']}
 let g:ale_warn_about_trailing_whitespace = 0
 noremap <leader>f :ALEFix<CR> 
+
+" Rust setup
+" nightly and racer required
+" rustup default nightly
+" cargo +nightly install racer
+let g:deoplete#sources#rust#racer_binary=$HOME . "/.cargo/bin/race"
+let g:deoplete#sources#rust#documentation_max_height=20
+
