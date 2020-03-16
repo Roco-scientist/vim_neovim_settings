@@ -23,6 +23,7 @@ git clone https://github.com/tell-k/vim-autopep8.git
 git clone https://github.com/Integralist/vim-mypy.git
 git clone https://github.com/rust-lang/rust.vim.git
 git clone https://github.com/sebastianmarkow/deoplete-rust.git
+git clone https://github.com/jalvesaq/Nvim-R.git
 cd -
 pip install jedi
 pip install yapf
