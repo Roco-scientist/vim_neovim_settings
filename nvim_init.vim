@@ -76,7 +76,7 @@ let R_assign = 0
 " cargo +nightly install racer
 " rustup component add rust-src
 " echo `rustc --print sysroot`/lib/rustlib/src/rust/src
-let g:deoplete#sources#rust#racer_binary=$HOME . "/.cargo/bin/race"
+let g:deoplete#sources#rust#racer_binary=$HOME . "/.cargo/bin/racer"
 let g:deoplete#sources#rust#rust_source_path=$HOME . "/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src"
 let g:deoplete#sources#rust#documentation_max_height=20
 
