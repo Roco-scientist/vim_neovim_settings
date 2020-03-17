@@ -18,7 +18,7 @@ set number
 set cursorline
 set smarttab
 set scrolloff=10
-autocmd BufNewFile,BufRead *.py
+autocmd BufNewFile,BufRead *.py,*.R,*.rs
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -62,8 +62,8 @@ let g:UltiSnipsUsePythonVersion = 3
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ale setup
-let g:ale_linters = {'python': ['flake8', 'mypy']}
-let g:ale_fixers = {'python': ['autopep8']}
+let g:ale_linters = {'python': ['flake8', 'mypy'], 'rust': ['cargo'], 'r': ['lintr']}
+let g:ale_fixers = {'python': ['autopep8'], 'rust': ['rustfmt'], 'r': ['styler']}
 let g:ale_warn_about_trailing_whitespace = 0
 noremap <leader>f :ALEFix<CR> 
 
