@@ -67,6 +67,9 @@ let g:ale_fixers = {'python': ['autopep8'], 'rust': ['rustfmt'], 'r': ['styler']
 let g:ale_warn_about_trailing_whitespace = 0
 noremap <leader>f :ALEFix<CR> 
 
+" R settings
+let R_assign = 0
+
 " Rust setup
 " nightly and racer required
 " rustup default nightly
