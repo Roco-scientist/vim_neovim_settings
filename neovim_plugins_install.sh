@@ -8,9 +8,9 @@ mkdir -p ~/.local/share/nvim/site/pack/plugins/start
 cd ~/.local/share/nvim/site/pack/plugins/start
 git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/jiangmiao/auto-pairs.git
-git clone https://github.com/Shougo/deoplete.nvim.git
-git clone --recursive https://github.com/deoplete-plugins/deoplete-jedi
-git clone https://github.com/davidhalter/jedi.git
+# git clone https://github.com/Shougo/deoplete.nvim.git
+# git clone --recursive https://github.com/deoplete-plugins/deoplete-jedi
+# git clone https://github.com/davidhalter/jedi.git
 git clone https://github.com/morhetz/gruvbox.git
 git clone https://github.com/honza/vim-snippets.git
 git clone https://github.com/SirVer/ultisnips.git
@@ -22,9 +22,10 @@ git clone https://github.com/nvie/vim-flake8.git
 git clone https://github.com/tell-k/vim-autopep8.git
 git clone https://github.com/Integralist/vim-mypy.git
 git clone https://github.com/rust-lang/rust.vim.git
-git clone https://github.com/sebastianmarkow/deoplete-rust.git
-git clone https://github.com/autozimu/LanguageClient-neovim.git
-bash ./LanguageClient-neovim/install.sh
+# git clone https://github.com/sebastianmarkow/deoplete-rust.git
+# git clone https://github.com/autozimu/LanguageClient-neovim.git
+# bash ./LanguageClient-neovim/install.sh
+curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
 git clone https://github.com/jalvesaq/Nvim-R.git
 cd -
 pip install jedi
@@ -49,3 +50,7 @@ git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
 cargo xtask install --server
 
 cd -
+echo "nodejs needed"
+echo "within nvim"
+echo ":CocInstall coc-rust-analyzer"
+echo ":CocInstall coc-python"

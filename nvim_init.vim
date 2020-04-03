@@ -48,7 +48,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
 " plugin settings
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 colorscheme gruvbox
 
 " ultisnips configuration
@@ -69,35 +69,3 @@ noremap <leader>f :ALEFix<CR>
 
 " R settings
 let R_assign = 0
-
-" Rust setup
-" nightly and racer required
-" rustup default nightly
-" cargo +nightly install racer
-" rustup component add rust-src
-" echo `rustc --print sysroot`/lib/rustlib/src/rust/src
-" let g:deoplete#sources#rust#racer_binary=$HOME . "/.cargo/bin/racer"
-" let g:deoplete#sources#rust#rust_source_path=$HOME . "/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src"
-" let g:deoplete#sources#rust#documentation_max_height=20
-set hidden
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-augroup filetype_rust
-    autocmd!
-    autocmd BufReadPost *.rs setlocal filetype=rust
-augroup END
-
-" Always draw sign column. Prevent buffer moving when adding/deleting sign.
-set signcolumn=yes
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rust-analyzer'],
-    \ }
-let $RUST_BACKTRACE = 1
-let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_virtualTextPrefix = ''
-let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
-let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
