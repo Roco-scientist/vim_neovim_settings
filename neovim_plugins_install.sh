@@ -23,6 +23,8 @@ git clone https://github.com/tell-k/vim-autopep8.git
 git clone https://github.com/Integralist/vim-mypy.git
 git clone https://github.com/rust-lang/rust.vim.git
 git clone https://github.com/sebastianmarkow/deoplete-rust.git
+git clone https://github.com/autozimu/LanguageClient-neovim.git
+bash ./LanguageClient-neovim/install.sh
 git clone https://github.com/jalvesaq/Nvim-R.git
 cd -
 pip install jedi
@@ -32,3 +34,18 @@ pip install neovim
 pip install pynvim
 pip install --user autopep8
 sudo apt-get install mypy
+cd
+# install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# install rustfmt (for formatting)
+rustup component add rustfmt
+
+# install clippy (for semantic linting)
+rustup component add clippy
+
+# hardest one last, install rust-analyzer
+git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
+cargo xtask install --server
+
+cd -
