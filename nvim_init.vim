@@ -47,6 +47,9 @@ set splitright
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
+" fzf enable
+set rtp+=/usr/local/opt/fzf
+
 " plugin settings
 " let g:deoplete#enable_at_startup = 1
 colorscheme gruvbox
