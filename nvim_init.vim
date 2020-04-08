@@ -64,11 +64,5 @@ let g:UltiSnipsUsePythonVersion = 3
 " supertab tab down
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" ale setup
-let g:ale_linters = {'python': ['flake8', 'mypy'], 'rust': ['cargo'], 'r': ['lintr']}
-let g:ale_fixers = {'python': ['autopep8'], 'rust': ['rustfmt'], 'r': ['styler']}
-let g:ale_warn_about_trailing_whitespace = 0
-noremap <leader>f :ALEFix<CR> 
-
 " R settings
 let R_assign = 0

@@ -17,10 +17,10 @@ git clone https://github.com/SirVer/ultisnips.git
 git clone https://github.com/vim-airline/vim-airline.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/airblade/vim-gitgutter.git
-git clone https://github.com/dense-analysis/ale.git
-git clone https://github.com/nvie/vim-flake8.git
-git clone https://github.com/tell-k/vim-autopep8.git
-git clone https://github.com/Integralist/vim-mypy.git
+# git clone https://github.com/dense-analysis/ale.git
+# git clone https://github.com/nvie/vim-flake8.git
+# git clone https://github.com/tell-k/vim-autopep8.git
+# git clone https://github.com/Integralist/vim-mypy.git
 git clone https://github.com/rust-lang/rust.vim.git
 # git clone https://github.com/sebastianmarkow/deoplete-rust.git
 # git clone https://github.com/autozimu/LanguageClient-neovim.git
