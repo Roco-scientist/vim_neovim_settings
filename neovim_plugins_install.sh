@@ -4,6 +4,7 @@ mkdir -p ~/.config/nvim/
 cp nvim_init.vim ~/.config/nvim/init.vim
 cp pep8 ~/.config
 cp flake8 ~/.config
+cp coc-settings.json ~/.config/nvim/
 mkdir -p ~/.local/share/nvim/site/pack/plugins/start
 cd ~/.local/share/nvim/site/pack/plugins/start
 # git clone https://github.com/ervandew/supertab.git
