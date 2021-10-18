@@ -20,7 +20,7 @@ cd
 # git clone https://github.com/neovim/neovim
 # cd neovim
 # git checkout stable
-# sudo make -j4
+# sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
 # sudo make install
 # cd -
 
@@ -42,17 +42,22 @@ cd ../..
 cd
 mkdir -p .local/bin/sumneko_lua/bin/Linux/
 cp lua-language-server/bin/Linux/lua-language-server .local/bin/sumneko_lua/bin/Linux/
+
+# install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 # Rust
 git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
 cargo build --release
-# install rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # install rustfmt (for formatting)
 rustup component add rustfmt
 
 # install clippy (for semantic linting)
 rustup component add clippy
+
+# Install tree-sitter
+cargo install tree-sitter-cli
 
 cd -
 echo "move rust-analyzer/target/release/rust-analyzer to /bin/"

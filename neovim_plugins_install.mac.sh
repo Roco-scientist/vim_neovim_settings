@@ -44,5 +44,8 @@ rustup component add rustfmt
 # install clippy (for semantic linting)
 rustup component add clippy
 
+# Install tree-sitter
+cargo install tree-sitter-cli
+
 cd -
 echo ":PackerSync"
