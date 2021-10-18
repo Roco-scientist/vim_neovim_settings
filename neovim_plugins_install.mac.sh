@@ -30,8 +30,8 @@ cd 3rd/luamake
 cd ../..
 ./3rd/luamake/luamake rebuild
 cd
-mkdir -p .local/bin/sumneko_lua/bin/Linux/
-cp lua-language-server/bin/Linux/lua-language-server .local/bin/sumneko_lua/bin/Linux/
+mkdir -p .local/bin/sumneko_lua/bin/
+cp lua-language-server/bin/Linux/lua-language-server .local/bin/sumneko_lua/bin/
 # Rust
 brew install rust-analyzer
 
