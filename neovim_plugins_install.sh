@@ -32,6 +32,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Python
 sudo npm i -g pyright
 # Lua
+sudo apt-get install ninja-build
 git clone https://github.com/sumneko/lua-language-server
 cd lua-language-server
 git submodule update --init --recursive
@@ -61,6 +62,8 @@ cargo install tree-sitter-cli
 
 # fd
 sudo apt install fd-find
+
+npm install -g neovim
 
 
 cd -
