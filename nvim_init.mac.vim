@@ -8,7 +8,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'rust-lang/rust.vim'
 Plug 'jalvesaq/Nvim-R'
 Plug 'neovim/nvim-lspconfig'
-Plug 'KarlWithK/rust-tools.nvim'
+Plug 'simrat39/rust-tools.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'hrsh7th/nvim-compe'
 Plug 'onsails/lspkind-nvim'
@@ -17,7 +17,7 @@ Plug 'SirVer/ultisnips'
 call plug#end()
 
 " set python location
-let g:python3_host_prog = $HOME . 'opt/anaconda3/bin/python'
+let g:python3_host_prog = $HOME . '/opt/anaconda3/bin/python'
 
 " remapping settings: exit, window movement
 let mapleader = " "

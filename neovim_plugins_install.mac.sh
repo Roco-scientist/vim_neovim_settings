@@ -4,11 +4,13 @@
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
+npm i -g pyright
+
 mkdir -p ~/.config/nvim/
-cp nvim_init.mac.vim ~/.config/nvim/init.vim
-cp pep8 ~/.config
-cp flake8 ~/.config
-cp coc-settings.json ~/.config/nvim/
+ln -s nvim_init.mac.vim ~/.config/nvim/init.vim
+ln -s pep8 ~/.config/pep8
+ln -s flake8 ~/.config/flake8
+ln -s coc-settings.json ~/.config/nvim/coc-settings.json
 cd -
 pip install jedi
 pip install yapf
