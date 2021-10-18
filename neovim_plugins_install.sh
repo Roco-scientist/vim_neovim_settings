@@ -15,9 +15,9 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 npm i -g pyright
 
 mkdir -p ~/.config/nvim/
-ln -s init.lua ~/.config/nvim/init.lua
-ln -s pep8 ~/.config/pep8
-ln -s flake8 ~/.config/flake8
+ln -s $PWD/init.lua ~/.config/nvim/init.lua
+ln -s $PWD/pep8 ~/.config/pep8
+ln -s $PWD/flake8 ~/.config/flake8
 cd -
 pip install jedi
 pip install yapf
