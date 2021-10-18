@@ -9,6 +9,7 @@ pip install jedi
 pip install yapf
 pip install --user flake8
 pip install pynvim
+pip install neovim
 pip install --user autopep8
 brew install mypy
 cd

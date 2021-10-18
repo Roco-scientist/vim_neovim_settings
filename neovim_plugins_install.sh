@@ -11,6 +11,7 @@ pip install yapf
 pip install --user flake8
 pip install pynvim
 pip install --user autopep8
+pip install neovim
 sudo apt-get install mypy
 cd
 
