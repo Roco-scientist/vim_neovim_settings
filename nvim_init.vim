@@ -7,6 +7,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'rust-lang/rust.vim'
 Plug 'jalvesaq/Nvim-R'
+Plug 'neovim/nvim-lspconfig'
+Plug 'KarlWithK/rust-tools.nvim'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'hrsh7th/nvim-compe'
+Plug 'onsails/lspkind-nvim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 " set python location
