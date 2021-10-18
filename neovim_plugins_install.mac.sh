@@ -4,7 +4,19 @@
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-npm i -g pyright
+# Install language servers ----------
+# Python
+sudo npm i -g pyright
+# Lua
+git clone https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --init --recursive
+cd 3rd/luamake
+./compile/install.sh
+cd ../..
+./3rd/luamake/luamake rebuild
+# Rust
+brew install rust-analyzer
 
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
@@ -26,9 +38,6 @@ rustup component add rustfmt
 
 # install clippy (for semantic linting)
 rustup component add clippy
-
-# Install rust-analyzer
-brew install rust-analyzer
 
 cd -
 echo ":PackerSync"

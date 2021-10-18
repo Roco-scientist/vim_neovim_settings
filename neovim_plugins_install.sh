@@ -4,6 +4,7 @@
 # sudo apt-get install libtool-bin
 # git clone https://github.com/neovim/neovim
 # cd neovim
+# git checkout stable
 # sudo make -j4
 # sudo make install
 # cd -
@@ -12,7 +13,20 @@
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-npm i -g pyright
+# Install language servers
+# Python
+sudo npm i -g pyright
+# Lua
+git clone https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --init --recursive
+cd 3rd/luamake
+./compile/install.sh
+cd ../..
+./3rd/luamake/luamake rebuild
+# Rust
+git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
+cargo build --release
 
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
@@ -34,10 +48,6 @@ rustup component add rustfmt
 
 # install clippy (for semantic linting)
 rustup component add clippy
-
-# hardest one last, install rust-analyzer
-git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
-cargo build --release
 
 cd -
 echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
