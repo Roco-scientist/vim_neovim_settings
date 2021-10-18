@@ -1,3 +1,14 @@
+call plug#begin(stdpath("data") . '/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jiangmiao/auto-pairs'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'rust-lang/rust.vim'
+Plug 'jalvesaq/Nvim-R'
+call plug#end()
+
 " set python location
 let g:python3_host_prog = $HOME . '/anaconda3/bin/python'
 
@@ -51,18 +62,8 @@ let g:netrw_liststyle = 3
 set rtp+=/usr/local/opt/fzf
 
 " plugin settings
-" let g:deoplete#enable_at_startup = 1
 colorscheme gruvbox
 
-" ultisnips configuration
-" let g:UltiSnipsExpandTrigger="<c-space>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" let g:UltiSnipsEditSplit="vertical"
-" let g:UltiSnipsUsePythonVersion = 3
-
-" supertab tab down
-" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " R settings
 let R_assign = 0
@@ -166,21 +167,3 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-"
-" Mappings using CoCList:
-" Show all diagnostics.
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
