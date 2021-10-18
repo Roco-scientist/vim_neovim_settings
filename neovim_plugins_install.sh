@@ -59,6 +59,10 @@ rustup component add clippy
 # Install tree-sitter
 cargo install tree-sitter-cli
 
+# fd
+sudo apt install fd-find
+
+
 cd -
 echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
 echo ":PackerSync"

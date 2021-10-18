@@ -47,5 +47,8 @@ rustup component add clippy
 # Install tree-sitter
 cargo install tree-sitter-cli
 
+# fd
+brew install fd
+
 cd -
 echo ":PackerSync"
