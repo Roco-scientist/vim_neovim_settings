@@ -40,7 +40,6 @@ require('packer').startup(function()
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'morhetz/gruvbox'
   use 'jiangmiao/auto-pairs'
-  use 'morhetz/gruvbox'
   use 'airblade/vim-gitgutter'
   use 'rust-lang/rust.vim'
   use 'jalvesaq/Nvim-R'
@@ -49,6 +48,8 @@ require('packer').startup(function()
   use 'onsails/lspkind-nvim'
   use 'ray-x/lsp_signature.nvim'
   use 'SirVer/ultisnips'
+  use 'BurntSushi/ripgrep'
+  use 'sharkdp/fd'
   
 end)
 
