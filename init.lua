@@ -130,7 +130,17 @@ vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 -- Rust-tools
-require('rust-tools').setup({})
+require('rust-tools').setup({
+	settings = { 
+  	["rust-analyzer"] = { 
+  		checkOnSave = {
+  			command = "clippy"
+  			} 
+  		} 
+  	} 
+  })
+
+require('rust-tools.inlay_hints').set_inlay_hints()
 
 -- Gitsigns
 require('gitsigns').setup {
