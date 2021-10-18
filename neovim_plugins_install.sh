@@ -1,4 +1,18 @@
 #!/bin/bash
+ 
+
+mkdir -p ~/.config/nvim/
+ln -s $PWD/init.lua ~/.config/nvim/init.lua
+ln -s $PWD/pep8 ~/.config/pep8
+ln -s $PWD/flake8 ~/.config/flake8
+cd -
+pip install jedi
+pip install yapf
+pip install --user flake8
+pip install pynvim
+pip install --user autopep8
+sudo apt-get install mypy
+cd
 
 # install neovim
 # sudo apt-get install libtool-bin
@@ -24,22 +38,10 @@ cd 3rd/luamake
 ./compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
+cd
 # Rust
 git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
 cargo build --release
-
-mkdir -p ~/.config/nvim/
-ln -s $PWD/init.lua ~/.config/nvim/init.lua
-ln -s $PWD/pep8 ~/.config/pep8
-ln -s $PWD/flake8 ~/.config/flake8
-cd -
-pip install jedi
-pip install yapf
-pip install --user flake8
-pip install pynvim
-pip install --user autopep8
-sudo apt-get install mypy
-cd
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
