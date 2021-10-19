@@ -50,5 +50,7 @@ cargo install tree-sitter-cli
 # fd
 brew install fd
 
+npm install -g neovim
+
 cd -
 echo ":PackerSync"
