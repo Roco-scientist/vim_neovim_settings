@@ -31,19 +31,19 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Install language servers
 # Python
 sudo npm i -g pyright
+
 # Lua
 sudo apt-get install ninja-build
-git clone https://github.com/sumneko/lua-language-server
+git clone --depth=1 https://hub.fastgit.org/sumneko/lua-language-server
 cd lua-language-server
 git submodule update --init --recursive
 cd 3rd/luamake
-./compile/install.sh
+compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
-cd
-mkdir -p .local/bin/sumneko_lua/bin/
-cp lua-language-server/bin/Linux/lua-language-server .local/bin/sumneko_lua/bin/
+export PATH="$HOME/tools/lua-language-server/bin/Linux:$PATH"
 
+cd
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 

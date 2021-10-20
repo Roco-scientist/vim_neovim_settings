@@ -22,16 +22,17 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Python
 sudo npm i -g pyright
 # Lua
-git clone https://github.com/sumneko/lua-language-server
+brew install ninja
+git clone --depth=1 https://hub.fastgit.org/sumneko/lua-language-server
 cd lua-language-server
 git submodule update --init --recursive
 cd 3rd/luamake
 ./compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
+export PATH="$HOME/tools/lua-language-server/bin/macOS:$PATH"
 cd
-mkdir -p .local/bin/sumneko_lua/bin/
-cp lua-language-server/bin/Linux/lua-language-server .local/bin/sumneko_lua/bin/
+
 # Rust
 brew install rust-analyzer
 
