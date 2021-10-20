@@ -72,3 +72,4 @@ cpanm -n Neovim::Ext
 cd -
 echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
 echo ":PackerSync"
+echo "Check that path in .profile is not after cargo/env"

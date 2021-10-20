@@ -58,3 +58,4 @@ cpanm -n Neovim::Ext
 
 cd -
 echo ":PackerSync"
+echo "Check that path in .profile is not after cargo/env"
