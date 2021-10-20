@@ -39,7 +39,7 @@ require('packer').startup(function()
   use 'jiangmiao/auto-pairs'
   use 'airblade/vim-gitgutter'
   -- use 'rust-lang/rust.vim'
-  use 'jalvesaq/Nvim-R'
+  -- use 'jalvesaq/Nvim-R'
   use 'simrat39/rust-tools.nvim'
   use 'kabouzeid/nvim-lspinstall'
   use 'onsails/lspkind-nvim'
@@ -353,13 +353,16 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
 -- local servers = { 'rust_analyzer', 'pyright' }
-local servers = { 'pyright' }
+local servers = { 'pyright', 'r_language_server' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
+
+-- R
+-- vim.cmd('let R_assign = 0')
 
 -- Lua
 local sumneko_binary_path = vim.fn.exepath('lua-language-server')
