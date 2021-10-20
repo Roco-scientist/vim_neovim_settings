@@ -64,6 +64,9 @@ cargo install tree-sitter-cli
 sudo apt install fd-find
 
 npm install -g neovim
+sudo gem install neovim
+sudo apt install cpanminus
+cpanm -n Neovim::Ext
 
 
 cd -

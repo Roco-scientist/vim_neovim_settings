@@ -51,6 +51,9 @@ cargo install tree-sitter-cli
 brew install fd
 
 npm install -g neovim
+sudo gem install neovim
+brew install cpanminus
+cpanm -n Neovim::Ext
 
 cd -
 echo ":PackerSync"
