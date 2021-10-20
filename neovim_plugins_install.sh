@@ -41,7 +41,7 @@ cd 3rd/luamake
 compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
-export PATH="$HOME/tools/lua-language-server/bin/Linux:$PATH"
+echo 'export PATH="$HOME/lua-language-server/bin/Linux:$PATH"' >> ~/.profile
 
 cd
 # install rust

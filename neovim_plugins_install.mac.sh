@@ -30,7 +30,7 @@ cd 3rd/luamake
 ./compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
-export PATH="$HOME/tools/lua-language-server/bin/macOS:$PATH"
+echo 'export PATH="$HOME/lua-language-server/bin/macOS:$PATH"' >> ~/.profile
 cd
 
 # Rust
