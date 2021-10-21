@@ -1,6 +1,17 @@
 #!/bin/bash
  
 
+sudo apt-get install ninja-build
+# install neovim
+cd
+sudo apt-get install libtool-bin
+git clone https://github.com/neovim/neovim
+cd neovim
+git checkout stable
+sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+cd
+
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
 ln -s $PWD/pep8 ~/.config/pep8
@@ -15,15 +26,6 @@ pip install neovim
 sudo apt-get install mypy
 cd
 
-# install neovim
-# sudo apt-get install libtool-bin
-# git clone https://github.com/neovim/neovim
-# cd neovim
-# git checkout stable
-# sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
-# sudo make install
-# cd -
-
 # install packer
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -33,7 +35,6 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 sudo npm i -g pyright
 
 # Lua
-sudo apt-get install ninja-build
 git clone --depth=1 https://hub.fastgit.org/sumneko/lua-language-server
 cd lua-language-server
 git submodule update --init --recursive
@@ -60,16 +61,17 @@ rustup component add clippy
 # Install tree-sitter
 cargo install tree-sitter-cli
 
+sudo apt-get install ruby-dev
 # fd
 sudo apt install fd-find
-
-npm install -g neovim
+sudo npm install -g neovim
 sudo gem install neovim
 sudo apt install cpanminus
-cpanm -n Neovim::Ext
+sudo cpanm -n Neovim::Ext
 
 
 cd -
 echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
 echo ":PackerSync"
+echo ":checkhealth"
 echo "Check that path in .profile is not after cargo/env"
