@@ -19,8 +19,15 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # Install language servers ----------
+# C++
+brew install llvm
+echo 'export PATH="$HOME/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
+echo 'export LDFLAGS="-L/$HOME/homebrew/opt/llvm/lib"' >> ~/.zprofile
+echo 'export CPPFLAGS="-I/$HOME/homebrew/opt/llvm/include"' >> ~/.zprofile
+
 # Python
 sudo npm i -g pyright
+
 # Lua
 brew install ninja
 git clone --depth=1 https://hub.fastgit.org/sumneko/lua-language-server
@@ -33,11 +40,11 @@ cd ../..
 echo 'export PATH="$HOME/lua-language-server/bin/macOS:$PATH"' >> ~/.profile
 cd
 
-# Rust
-brew install rust-analyzer
-
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Rust
+brew install rust-analyzer
 
 # install rustfmt (for formatting)
 rustup component add rustfmt

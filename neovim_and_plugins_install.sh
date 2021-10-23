@@ -31,6 +31,9 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # Install language servers
+# C+ ---- update this later if needed
+sudo apt-get install clangd-12
+
 # Python
 sudo npm i -g pyright
 
@@ -45,6 +48,7 @@ cd ../..
 echo 'export PATH="$HOME/lua-language-server/bin/Linux:$PATH"' >> ~/.profile
 
 cd
+
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 

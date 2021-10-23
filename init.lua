@@ -354,7 +354,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
 -- local servers = { 'rust_analyzer', 'pyright' }
-local servers = { 'pyright', 'r_language_server' }
+local servers = { 'pyright', 'r_language_server', 'clangd' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
