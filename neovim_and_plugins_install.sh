@@ -32,7 +32,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 
 # Install language servers
 # C+ ---- update this later if needed
-sudo apt-get install clangd-12
+sudo apt-get install clangd
 
 # Python
 sudo npm i -g pyright
