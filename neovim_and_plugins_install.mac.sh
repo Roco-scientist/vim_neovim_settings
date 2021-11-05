@@ -21,6 +21,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Install language servers ----------
 # C++
 brew install llvm
+brew install clang-format
 echo 'export PATH="$HOME/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
 echo 'export LDFLAGS="-L/$HOME/homebrew/opt/llvm/lib"' >> ~/.zprofile
 echo 'export CPPFLAGS="-I/$HOME/homebrew/opt/llvm/include"' >> ~/.zprofile
