@@ -26,6 +26,9 @@ echo 'export PATH="$HOME/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
 echo 'export LDFLAGS="-L/$HOME/homebrew/opt/llvm/lib"' >> ~/.zprofile
 echo 'export CPPFLAGS="-I/$HOME/homebrew/opt/llvm/include"' >> ~/.zprofile
 
+# Go
+brew install gopls
+
 # Python
 sudo npm i -g pyright
 
