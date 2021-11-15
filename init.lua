@@ -60,6 +60,7 @@ require('packer').startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'rhysd/vim-clang-format'
   use 'preservim/nerdtree'
+  use 'darrikonn/vim-gofmt'
 
 end)
 
@@ -124,7 +125,7 @@ vim.api.nvim_set_keymap('n', '<leader>k', '<C-w>k', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<leader>l', '<C-w>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>h', '<C-w>h', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', '<leader>c', '+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', '<leader>n', ':NERDTree<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<leader>n', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
 
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
