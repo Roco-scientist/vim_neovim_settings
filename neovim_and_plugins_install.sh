@@ -11,6 +11,9 @@ git checkout stable
 sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
 cd
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+unzip JetBrainsMono.zip
+
 
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
@@ -81,3 +84,4 @@ echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
 echo ":PackerSync"
 echo ":checkhealth"
 echo "Check that path in .profile is not after cargo/env"
+echo "Install JetBrainsMono font for the terminal"
