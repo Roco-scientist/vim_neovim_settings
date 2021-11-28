@@ -15,6 +15,7 @@ brew install mypy
 cd
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
 unzip JetBrainsMono.zip
+cp ./JetBrainsMono/* ~/Library/Fonts/
 
 # install packer
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\

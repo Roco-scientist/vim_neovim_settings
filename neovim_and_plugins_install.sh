@@ -13,6 +13,7 @@ sudo make install
 cd
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
 unzip JetBrainsMono.zip
+sudo cp ./JetBrainsMono/* /usr/share/fonts/
 
 
 mkdir -p ~/.config/nvim/
