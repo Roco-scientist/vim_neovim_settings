@@ -13,9 +13,10 @@ pip install neovim
 pip install --user autopep8
 brew install mypy
 cd
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-unzip JetBrainsMono.zip
-cp ./JetBrainsMono/* ~/Library/Fonts/
+curl https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -Lo FiraCode.zip
+mkdir FiraCode
+unzip FiraCode.zip -d ./FiraCode
+cp ./FiraCode/* ~/Library/Fonts/
 
 # install packer
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
@@ -73,4 +74,4 @@ cpanm -n Neovim::Ext
 cd -
 echo ":PackerSync"
 echo "Check that path in .profile is not after cargo/env"
-echo "Install JetBrainsMono font for the terminal"
+echo "Install Fira Code font for the terminal"
