@@ -1,21 +1,7 @@
 #!/bin/bash
  
-
 sudo apt-get install ninja-build
-# install neovim
-cd
-sudo apt-get install libtool-bin
-git clone https://github.com/neovim/neovim
-cd neovim
-git checkout stable
-sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-cd
-curl https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -Lo FiraCode.zip
-mkdir FiraCode
-unzip FiraCode.zip -d ./FiraCode
-sudo cp ./FiraCode/* /usr/share/fonts/
-
+sudo cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf /usr/share/fonts/
 
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
@@ -29,6 +15,14 @@ pip install pynvim
 pip install --user autopep8
 pip install neovim
 sudo apt-get install mypy
+# install neovim
+cd
+sudo apt-get install libtool-bin
+git clone https://github.com/neovim/neovim
+cd neovim
+git checkout stable
+sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
 cd
 
 # install packer

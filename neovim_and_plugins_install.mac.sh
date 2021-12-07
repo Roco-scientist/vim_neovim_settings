@@ -4,6 +4,7 @@ mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
 ln -s $PWD/pep8 ~/.config/pep8
 ln -s $PWD/flake8 ~/.config/flake8
+cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf ~/Library/Fonts/
 cd -
 pip install jedi
 pip install yapf
@@ -13,10 +14,6 @@ pip install neovim
 pip install --user autopep8
 brew install mypy
 cd
-curl https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -Lo FiraCode.zip
-mkdir FiraCode
-unzip FiraCode.zip -d ./FiraCode
-cp ./FiraCode/* ~/Library/Fonts/
 
 # install packer
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
