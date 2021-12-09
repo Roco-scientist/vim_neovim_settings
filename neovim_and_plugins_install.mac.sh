@@ -72,3 +72,4 @@ cd -
 echo ":PackerSync"
 echo "Check that path in .profile is not after cargo/env"
 echo "Install Fira Code font for the terminal"
+echo "TSInstall <languages>"
