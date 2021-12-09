@@ -35,7 +35,7 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
-  use 'morhetz/gruvbox'
+  use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
   use 'jiangmiao/auto-pairs'
   use 'airblade/vim-gitgutter'
   -- use 'rust-lang/rust.vim'
@@ -109,6 +109,7 @@ vim.opt.clipboard = {'unnamed', 'unnamedplus'}
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
+vim.o.background = "dark"
 vim.cmd [[colorscheme gruvbox]]
 
 --Set statusbar
