@@ -19,6 +19,7 @@ sudo apt-get install mypy
 # install neovim
 cd
 sudo apt-get install libtool-bin
+sudo apt-get install ripgrep
 git clone https://github.com/neovim/neovim
 cd neovim
 git checkout stable
