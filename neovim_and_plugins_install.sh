@@ -10,6 +10,7 @@ ln -s $PWD/flake8 ~/.config/flake8
 cd -
 pip install jedi
 pip install yapf
+pip install black
 pip install --user flake8
 pip install pynvim
 pip install --user autopep8

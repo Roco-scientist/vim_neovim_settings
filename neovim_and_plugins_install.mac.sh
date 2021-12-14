@@ -7,6 +7,7 @@ ln -s $PWD/flake8 ~/.config/flake8
 cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf ~/Library/Fonts/
 cd -
 pip install jedi
+pip install black
 pip install yapf
 pip install --user flake8
 pip install pynvim
