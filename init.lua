@@ -79,6 +79,11 @@ vim.o.inccommand = 'nosplit'
 --Make line numbers default
 vim.wo.number = true
 
+--Set tabs to 4 spaces
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+
 --Do not save when switching buffers (note: this is now a default on master)
 vim.o.hidden = true
 
@@ -351,7 +356,7 @@ require('nvim-treesitter.configs').setup {
     },
   },
   indent = {
-    enable = true,
+    enable = false,
   },
   textobjects = {
     select = {
