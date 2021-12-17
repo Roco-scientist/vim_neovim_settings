@@ -13,7 +13,7 @@ pip install --user flake8
 pip install pynvim
 pip install neovim
 pip install --user autopep8
-brew install eypy
+brew install mypy
 brew install ripgrep
 cd
 
