@@ -57,7 +57,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Rust
 git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
-cargo build --release
+cargo xtask install --server
 
 # install rustfmt (for formatting)
 rustup component add rustfmt
