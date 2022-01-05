@@ -139,8 +139,11 @@ vim.api.nvim_set_keymap('n', '<leader>h', '<C-w>h', { noremap = true, silent = t
 vim.api.nvim_set_keymap('', '<leader>c', '+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', '<leader>f', ':!cargo fmt<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', '<leader>b', ':call Black()<CR>', { noremap = true, silent = true })
+
+-- Reformat file shortcuts
+vim.api.nvim_set_keymap('', '<leader>f', ':!cargo fmt<CR>', { noremap = true, silent = true }) -- Rust
+vim.api.nvim_set_keymap('', '<leader>b', ':call Black()<CR>', { noremap = true, silent = true }) -- Python
+vim.api.nvim_set_keymap('', '<leader>p', ':%!python -m json.tool<CR>', { noremap = true, silent = true }) -- JSON
 
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
