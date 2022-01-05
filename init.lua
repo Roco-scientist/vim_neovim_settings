@@ -141,9 +141,9 @@ vim.api.nvim_set_keymap('', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true
 vim.api.nvim_set_keymap('', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
 
 -- Reformat file shortcuts
-vim.api.nvim_set_keymap('', '<leader>f', ':!cargo fmt<CR>', { noremap = true, silent = true }) -- Rust
-vim.api.nvim_set_keymap('', '<leader>b', ':call Black()<CR>', { noremap = true, silent = true }) -- Python
-vim.api.nvim_set_keymap('', '<leader>p', ':%!python -m json.tool<CR>', { noremap = true, silent = true }) -- JSON
+vim.api.nvim_set_keymap('', '<leader>fr', ':!cargo fmt<CR>', { noremap = true, silent = true }) -- Rust
+vim.api.nvim_set_keymap('', '<leader>fp', ':call Black()<CR>', { noremap = true, silent = true }) -- Python
+vim.api.nvim_set_keymap('', '<leader>fj', ':%!python -m json.tool<CR>', { noremap = true, silent = true }) -- JSON
 
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -202,7 +202,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   -- require'completion'.on_attach(client)
 end
