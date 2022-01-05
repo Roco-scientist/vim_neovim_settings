@@ -144,6 +144,7 @@ vim.api.nvim_set_keymap('', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = tru
 vim.api.nvim_set_keymap('', '<leader>fr', ':!cargo fmt<CR>', { noremap = true, silent = true }) -- Rust
 vim.api.nvim_set_keymap('', '<leader>fp', ':call Black()<CR>', { noremap = true, silent = true }) -- Python
 vim.api.nvim_set_keymap('', '<leader>fj', ':%!python -m json.tool<CR>', { noremap = true, silent = true }) -- JSON
+vim.api.nvim_set_keymap('', '<leader>fc', ':ClangFormat<CR>', { noremap = true, silent = true }) -- C++
 
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -207,56 +208,6 @@ local on_attach = function(client, bufnr)
   -- require'completion'.on_attach(client)
 end
 
-
--- Rust-tools
-
--- Avoid showing extra messages when using completion
-
--- Configure LSP through rust-tools.nvim plugin.
--- rust-tools will configure and enable certain LSP features for us.
--- See https://github.com/simrat39/rust-tools.nvim#configuration
-
-local opts = {
-    tools = { -- rust-tools options
-        autoSetHints = true,
-        hover_with_actions = true,
-        inlay_hints = {
-            show_parameter_hints = false,
-            -- parameter_hints_prefix = "",
-            -- other_hints_prefix = "",
-        },
-    },
-
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        on_attach = on_attach,
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                assist = {
-                    importGranularity = "module",
-                    importPrefix = "by_self",
-                },
-                cargo = {
-                    loadOutDirsFromCheck = true
-                },
-                procMacro = {
-                    enable = true
-                },
-                -- enable clippy on save
-                checkOnSave = {
-                    command = "clippy"
-                },
-            }
-        }
-    },
-}
-
-require('rust-tools').setup(opts)
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
@@ -420,6 +371,51 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+-- Rust-tools
+
+-- Avoid showing extra messages when using completion
+
+-- Configure LSP through rust-tools.nvim plugin.
+-- rust-tools will configure and enable certain LSP features for us.
+-- See https://github.com/simrat39/rust-tools.nvim#configuration
+
+local opts = {
+    tools = { -- rust-tools options
+        -- autoSetHints = true,
+        -- hover_with_actions = true,
+        inlay_hints = {
+            show_parameter_hints = false,
+            -- parameter_hints_prefix = "",
+            -- other_hints_prefix = "",
+        },
+    },
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- assist = {
+                --     importGranularity = "module",
+                --     importPrefix = "by_self",
+                -- },
+                -- enable clippy on save
+                -- checkOnSave = {
+                --     command = "clippy"
+                -- },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
 
 -- R
 -- vim.cmd('let R_assign = 0')
