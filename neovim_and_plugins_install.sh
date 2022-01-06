@@ -1,6 +1,6 @@
 #!/bin/bash
  
-sudo apt-get install ninja-build
+sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext
 sudo cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf /usr/share/fonts/
 
 mkdir -p ~/.config/nvim/
@@ -8,7 +8,6 @@ ln -s $PWD/init.lua ~/.config/nvim/init.lua
 ln -s $PWD/pep8 ~/.config/pep8
 ln -s $PWD/flake8 ~/.config/flake8
 cd -
-sudo apt-get install mypy
 pip install jedi
 pip install yapf
 pip install black
@@ -18,8 +17,6 @@ pip install --user autopep8
 pip install neovim
 # install neovim
 cd
-sudo apt-get install libtool-bin
-sudo apt-get install ripgrep
 git clone https://github.com/neovim/neovim
 cd neovim
 git checkout stable
@@ -30,12 +27,6 @@ cd
 # install packer
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-# Install language servers
-# C+ ---- update this later if needed
-sudo apt-get install clang-format
-sudo apt-get install clangd
-sudo apt-get install clang-tidy
 
 # Python
 sudo npm i -g pyright
@@ -68,12 +59,6 @@ rustup component add clippy
 # Install tree-sitter
 cargo install tree-sitter-cli
 
-# Install a clipboard
-sudo apt-get install xclip
-
-sudo apt-get install ruby-dev
-# fd
-sudo apt install fd-find
 sudo npm install -g neovim
 sudo gem install neovim
 sudo apt install cpanminus
