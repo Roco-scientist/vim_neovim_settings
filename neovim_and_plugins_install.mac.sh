@@ -68,7 +68,8 @@ brew install fd
 npm install -g neovim
 sudo gem install neovim
 brew install cpanminus
-cpanm -n Neovim::Ext
+sudo cpanm -n Neovim::Ext
+sudo cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
 cd -
 echo ":PackerSync"

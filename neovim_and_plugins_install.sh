@@ -68,6 +68,9 @@ rustup component add clippy
 # Install tree-sitter
 cargo install tree-sitter-cli
 
+# Install a clipboard
+sudo apt-get install xclip
+
 sudo apt-get install ruby-dev
 # fd
 sudo apt install fd-find
@@ -75,7 +78,7 @@ sudo npm install -g neovim
 sudo gem install neovim
 sudo apt install cpanminus
 sudo cpanm -n Neovim::Ext
-
+cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
 cd -
 echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
@@ -84,3 +87,4 @@ echo ":checkhealth"
 echo "Check that path in .profile is not after cargo/env"
 echo "Install Fira Code font for the terminal"
 echo "TSInstall <languages>"
+echo "set DISPLAY=:1 in ~/.profile if installed on a remote system to allow xclip"
