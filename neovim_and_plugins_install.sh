@@ -8,6 +8,7 @@ ln -s $PWD/init.lua ~/.config/nvim/init.lua
 ln -s $PWD/pep8 ~/.config/pep8
 ln -s $PWD/flake8 ~/.config/flake8
 cd -
+sudo apt-get install mypy
 pip install jedi
 pip install yapf
 pip install black
@@ -15,7 +16,6 @@ pip install --user flake8
 pip install pynvim
 pip install --user autopep8
 pip install neovim
-sudo apt-get install mypy
 # install neovim
 cd
 sudo apt-get install libtool-bin
