@@ -1,6 +1,6 @@
 #!/bin/bash
  
-sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext
+sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext curl
 sudo cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf /usr/share/fonts/
 
 mkdir -p ~/.config/nvim/
