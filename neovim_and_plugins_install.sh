@@ -1,6 +1,6 @@
 #!/bin/bash
  
-sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext curl
+sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext curl nodejs npm
 sudo cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf /usr/share/fonts/
 
 mkdir -p ~/.config/nvim/
@@ -8,6 +8,8 @@ ln -s $PWD/init.lua ~/.config/nvim/init.lua
 ln -s $PWD/pep8 ~/.config/pep8
 ln -s $PWD/flake8 ~/.config/flake8
 cd -
+# curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+# sudo python2 get-pip.py
 pip install jedi
 pip install yapf
 pip install black
@@ -40,6 +42,7 @@ compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
 echo 'export PATH="$HOME/lua-language-server/bin/Linux:$PATH"' >> ~/.profile
+echo "export DISPLAY=:1" >> ~/.profile
 
 cd
 
@@ -67,10 +70,9 @@ sudo cpanm -n Neovim::Ext
 cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
 cd -
-echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
 echo ":PackerSync"
 echo ":checkhealth"
 echo "Check that path in .profile is not after cargo/env"
-echo "Install Fira Code font for the terminal"
-echo "TSInstall <languages>"
+echo "Install rorboto mono font for the terminal"
+echo "TSInstall <languages> bash c r rust lua json python"
 echo "set DISPLAY=:1 in ~/.profile if installed on a remote system to allow xclip"
