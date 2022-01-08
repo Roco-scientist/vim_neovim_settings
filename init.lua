@@ -41,6 +41,7 @@ require('packer').startup(function()
   -- use 'rust-lang/rust.vim'
   -- use 'jalvesaq/Nvim-R'
   use 'simrat39/rust-tools.nvim'
+  use 'nvim-telescope/telescope-ui-select.nvim'
   use 'kabouzeid/nvim-lspinstall'
   use 'onsails/lspkind-nvim'
   use 'nvim-lua/lsp_extensions.nvim'
@@ -284,16 +285,26 @@ require('gitsigns').setup {
 }
 
 -- Telescope
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
+require('telescope').setup { 
+    extensions = { 
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+
+            }
+        }
     },
-  },
+    defaults = {
+        mappings = {
+            i = {
+                ['<C-u>'] = false,
+                ['<C-d>'] = false,
+            },
+        },
+    },
 }
+
+require("telescope").load_extension("ui-select")
+
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
