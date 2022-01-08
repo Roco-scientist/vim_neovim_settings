@@ -1,18 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
-ln -s $PWD/pep8 ~/.config/pep8
-ln -s $PWD/flake8 ~/.config/flake8
 cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf ~/Library/Fonts/
 cd -
-pip install jedi
-pip install black
-pip install yapf
-pip install --user flake8
-pip install pynvim
 pip install neovim
-pip install --user autopep8
 brew install mypy
 brew install ripgrep
 cd
@@ -37,14 +29,14 @@ sudo npm i -g pyright
 
 # Lua
 brew install ninja
-git clone --depth=1 https://hub.fastgit.org/sumneko/lua-language-server
+git clone https://github.com/sumneko/lua-language-server
 cd lua-language-server
 git submodule update --init --recursive
 cd 3rd/luamake
 ./compile/install.sh
 cd ../..
 ./3rd/luamake/luamake rebuild
-echo 'export PATH="$HOME/lua-language-server/bin/macOS:$PATH"' >> ~/.profile
+echo 'export PATH="$HOME/lua-language-server/bin/macOS:$PATH"' >> ~/.zprofile
 cd
 
 # install rust
@@ -73,6 +65,6 @@ sudo cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -
 
 cd -
 echo ":PackerSync"
-echo "Check that path in .profile is not after cargo/env"
-echo "Install Fira Code font for the terminal"
+echo "Check that path in .zprofile is not after cargo/env"
+echo "Install roboto font for the terminal"
 echo "TSInstall <languages>"
