@@ -5,7 +5,9 @@ ln -s $PWD/init.lua ~/.config/nvim/init.lua
 cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf ~/Library/Fonts/
 cd -
 pip install neovim
+pip install black
 brew install mypy
+brew install black
 brew install ripgrep
 cd
 

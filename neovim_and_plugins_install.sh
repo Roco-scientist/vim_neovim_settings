@@ -25,6 +25,7 @@ cd -
 # sudo python2 get-pip.py
 # python2 -m pip install neovim
 pip install neovim
+pip install black
 # install neovim
 cd
 git clone https://github.com/neovim/neovim
