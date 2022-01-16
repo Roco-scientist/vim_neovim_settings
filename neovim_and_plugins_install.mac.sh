@@ -65,6 +65,11 @@ brew install cpanminus
 sudo cpanm -n Neovim::Ext
 sudo cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
+# solidity  and lsp
+brew tap ethereum/ethereum
+brew install solidity
+npm install -g solidity-language-server
+
 cd -
 echo ":PackerSync"
 echo "Check that path in .zprofile is not after cargo/env"

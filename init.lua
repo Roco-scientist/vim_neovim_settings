@@ -63,11 +63,12 @@ require('packer').startup(function()
   use 'rhysd/vim-clang-format'
   use 'darrikonn/vim-gofmt'
   use 'kyazdani42/nvim-web-devicons'
+  use 'tomlion/vim-solidity'
   use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function() require'nvim-tree'.setup {} end
-}
+    }
 
 end)
 
@@ -375,13 +376,16 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
 -- local servers = { 'rust_analyzer', 'pyright' }
-local servers = { 'pyright', 'r_language_server', 'gopls' }
+local servers = { 'pyright', 'r_language_server', 'gopls', 'solidity_ls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
+
+-- require'lspconfig'.solidity_ls.setup{}
+-- require'lspconfig'.solc.setup{}
 
 -- Rust-tools
 

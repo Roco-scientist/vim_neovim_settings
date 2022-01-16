@@ -82,6 +82,11 @@ sudo apt install cpanminus
 sudo cpanm -n Neovim::Ext
 cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
+# solidity and lsp
+sudo add-apt-repository ppa:ethereum/ethereum
+sudo apt-get install solc
+npm install -g solidity-language-server
+
 cd $SETTINGS_DIR
 echo ":PackerSync"
 echo ":checkhealth"
