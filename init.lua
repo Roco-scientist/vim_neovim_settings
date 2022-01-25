@@ -70,6 +70,9 @@ require('packer').startup(function()
     config = function() require'nvim-tree'.setup {} end
     }
 
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+
 end)
 
 --Incremental live completion (note: this is now a default on master)
@@ -81,10 +84,13 @@ vim.o.inccommand = 'nosplit'
 --Make line numbers default
 vim.wo.number = true
 
---Set tabs to 4 spaces
+--Set tabs to 2 spaces for js/ts/html, otherwise 4 spaces
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+vim.cmd [[ 
+    autocmd BufRead,BufNewFile *.htm,*.html,*.js,*.ts setlocal tabstop=2 shiftwidth=2 softtabstop=2
+]]
 
 --Do not save when switching buffers (note: this is now a default on master)
 vim.o.hidden = true
@@ -468,6 +474,39 @@ require'lspconfig'.sumneko_lua.setup {
         },
     },
 }
+
+-- Typescript ls
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+        silent = true,
+    })
+end
+
+require("lspconfig").tsserver.setup({
+    on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({})
+        ts_utils.setup_client(client)
+        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
+        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+        on_attach(client, bufnr)
+    end,
+})
+
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.code_actions.eslint,
+        null_ls.builtins.formatting.prettier
+    },
+    on_attach = on_attach
+})
+
+-- C language server
 
 require('lspconfig').clangd.setup {
         cmd = {
