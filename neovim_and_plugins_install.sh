@@ -87,6 +87,10 @@ sudo add-apt-repository ppa:ethereum/ethereum
 sudo apt-get install solc
 npm install -g solidity-language-server
 
+# Typescript
+npm install -g typescript typescript-language-server eslint prettier
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+
 cd $SETTINGS_DIR
 echo ":PackerSync"
 echo ":checkhealth"

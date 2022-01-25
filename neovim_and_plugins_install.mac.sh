@@ -70,6 +70,9 @@ brew tap ethereum/ethereum
 brew install solidity
 npm install -g solidity-language-server
 
+# Typescript
+npm install -g typescript typescript-language-server eslint prettier
+
 cd -
 echo ":PackerSync"
 echo "Check that path in .zprofile is not after cargo/env"
