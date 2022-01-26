@@ -119,6 +119,7 @@ vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 -- other options
 vim.opt.scrolloff = 10
 vim.opt.wrap = false
+vim.wo.cursorline = true
 vim.opt.clipboard = {'unnamed', 'unnamedplus'}
 
 --Set colorscheme (order is important here)
