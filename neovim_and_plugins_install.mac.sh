@@ -45,7 +45,8 @@ cd
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Rust
-brew install rust-analyzer
+rustup component add rust-analyzer
+# brew install rust-analyzer
 
 # install rustfmt (for formatting)
 rustup component add rustfmt
