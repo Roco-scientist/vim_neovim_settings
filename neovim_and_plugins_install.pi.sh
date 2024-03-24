@@ -2,14 +2,7 @@
  
 VIM_DIR=$PWD
 
-sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus
-# install neovim
-cd
-git clone https://github.com/neovim/neovim
-cd neovim
-git checkout stable
-sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
+sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus neovim
 cd
 
 mkdir -p ~/.config/nvim/
@@ -66,7 +59,6 @@ sudo cpanm -n Neovim::Ext
 
 
 cd -
-echo "move rust-analyzer/target/release/rust-analyzer to /bin/"
 echo ":PackerSync"
 echo ":checkhealth"
 echo "Check that path in .profile is not after cargo/env"
