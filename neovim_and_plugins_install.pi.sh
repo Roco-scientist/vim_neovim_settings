@@ -2,10 +2,9 @@
  
 VIM_DIR=$PWD
 
-sudo apt-get install ninja-build
+sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus
 # install neovim
 cd
-sudo apt-get install libtool-bin
 git clone https://github.com/neovim/neovim
 cd neovim
 git checkout stable
@@ -24,7 +23,6 @@ pip install --user flake8
 pip install pynvim
 pip install --user autopep8
 pip install neovim
-sudo apt-get install mypy
 cd
 
 # install packer
@@ -62,12 +60,8 @@ rustup component add clippy
 # Install tree-sitter
 cargo install tree-sitter-cli
 
-sudo apt-get install ruby-dev
-# fd
-sudo apt install fd-find
 sudo npm install -g neovim
 sudo gem install neovim
-sudo apt install cpanminus
 sudo cpanm -n Neovim::Ext
 
 
