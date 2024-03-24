@@ -2,7 +2,7 @@
  
 VIM_DIR=$PWD
 
-sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus neovim
+sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus neovim tmux exa
 cd
 
 mkdir -p ~/.config/nvim/
@@ -40,15 +40,16 @@ cd
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# Rust
-git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
-cargo build --release
 
+source ~/.profile
 # install rustfmt (for formatting)
 rustup component add rustfmt
 
 # install clippy (for semantic linting)
 rustup component add clippy
+
+# install clippy (for semantic linting)
+rustup component add rust-analyzer
 
 # Install tree-sitter
 cargo install tree-sitter-cli
