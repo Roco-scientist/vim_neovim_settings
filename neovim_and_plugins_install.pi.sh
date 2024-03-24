@@ -2,7 +2,7 @@
  
 VIM_DIR=$PWD
 
-sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus neovim tmux exa
+sudo apt-get -y install ninja-build libtool-bin mypy ruby-dev fd-find cpanminus neovim tmux exa fzf
 cd
 
 mkdir -p ~/.config/nvim/
