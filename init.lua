@@ -73,20 +73,35 @@ require('packer').startup(function()
   use({
     "Robitx/gp.nvim",
     config = function()
-      require("gp").setup({
-        -- The agent table specifies the active provider and its settings
-        agent = {
-          provider = "gemini",   -- Use the "gemini" provider
-          model = "gemini-pro",  -- Specify the model for the provider
-          -- API key is read from the GOOGLE_API_KEY environment variable
-        },
-        -- Other settings, like chat window style
-        chat_options = {
-          window = 'telescope',
-        },
-      })
-      end,
-  })
+        local conf = {
+            providers = {
+                openai = {
+                    disable = true,
+                    endpoint = "https://api.openai.com/v1/chat/completions",
+                },
+                googleai = {
+                    disable = false,
+                    endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
+                    secret = os.getenv("GOOGLEAI_API_KEY"),
+                },
+            },
+            agents = {
+                {
+                    name = "ChatGPT3-5",
+                    disable = true,
+                },
+                {
+                    provider = "googleai",
+                    name = "ChatGemini",
+                    chat = true,
+                    command = false,
+                    model = { model = "gemini-pro", temperature = 1.1, top_p = 1 },
+                    system_prompt = require("gp.defaults").chat_system_prompt,},
+                },
+            }
+            require("gp").setup(conf)
+        end,
+    })
 
 end)
 
