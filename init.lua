@@ -18,7 +18,6 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-  -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use 'nvim-telescope/telescope-ui-select.nvim'
@@ -30,7 +29,6 @@ require('packer').startup(function()
     'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
     config = function() require('gitsigns').setup() end
   }
-  -- use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter'
   -- Additional textobjects for treesitter
@@ -42,14 +40,8 @@ require('packer').startup(function()
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
   use 'jiangmiao/auto-pairs'
-  -- use 'airblade/vim-gitgutter'
-  -- use 'rust-lang/rust.vim'
-  -- use 'jalvesaq/Nvim-R'
-  use 'simrat39/rust-tools.nvim'
-  use 'kabouzeid/nvim-lspinstall'
   use 'onsails/lspkind-nvim'
-  use 'nvim-lua/lsp_extensions.nvim'
-  use 'ray-x/lsp_signature.nvim'
+
   use 'SirVer/ultisnips'
   use 'BurntSushi/ripgrep'
   use 'sharkdp/fd'
@@ -77,6 +69,24 @@ require('packer').startup(function()
 
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  use 'mason-org/mason.nvim'
+  use({
+    "Robitx/gp.nvim",
+    config = function()
+      require("gp").setup({
+        -- The agent table specifies the active provider and its settings
+        agent = {
+          provider = "gemini",   -- Use the "gemini" provider
+          model = "gemini-pro",  -- Specify the model for the provider
+          -- API key is read from the GOOGLE_API_KEY environment variable
+        },
+        -- Other settings, like chat window style
+        chat_options = {
+          window = 'telescope',
+        },
+      })
+      end,
+  })
 
 end)
 
@@ -214,8 +224,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
@@ -387,6 +397,12 @@ vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 
+-- Keymaps for gp.nvim
+vim.api.nvim_set_keymap('n', '<leader>gn', '<cmd>GpChatNew<CR>', { noremap = true, silent = true, desc = "GP: New Chat" })
+vim.api.nvim_set_keymap('n', '<leader>gt', '<cmd>GpChatToggle<CR>', { noremap = true, silent = true, desc = "GP: Toggle Chat" })
+vim.api.nvim_set_keymap('v', '<leader>ge', '<cmd>GpExplain<CR>', { noremap = true, silent = true, desc = "GP: Explain code" })
+vim.api.nvim_set_keymap('v', '<leader>gr', '<cmd>GpRewrite<CR>', { noremap = true, silent = true, desc = "GP: Rewrite code" })
+
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
@@ -440,146 +456,19 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
--- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+vim.diagnostic.config({ virtual_text = true })
 
--- Enable the following language servers
--- local servers = { ' 'pyright' }
-local servers = { 'rust_analyzer', 'pyright', 'r_language_server', 'gopls', 'solidity_ls' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
+require("mason").setup()
 
-
-
--- require'lspconfig'.solidity_ls.setup{}
--- require'lspconfig'.solc.setup{}
-
--- Rust-tools
-
--- Avoid showing extra messages when using completion
-
--- Configure LSP through rust-tools.nvim plugin.
--- rust-tools will configure and enable certain LSP features for us.
--- See https://github.com/simrat39/rust-tools.nvim#configuration
-
-local opts = {
-    tools = { -- rust-tools options
-        -- autoSetHints = true,
-        -- hover_with_actions = true,
-        inlay_hints = {
-            show_parameter_hints = false,
-            -- parameter_hints_prefix = "",
-            -- other_hints_prefix = "",
-        },
-    },
-
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                -- assist = {
-                --     importGranularity = "module",
-                --     importPrefix = "by_self",
-                -- },
-                -- enable clippy on save
-                -- checkOnSave = {
-                --     command = "clippy"
-                -- },
-            }
-        }
-    },
-}
-
-require('rust-tools').setup(opts)
-
--- R
--- vim.cmd('let R_assign = 0')
-
--- Lua
--- local sumneko_binary_path = vim.fn.exepath('lua-language-server')
--- local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
-
--- local runtime_path = vim.split(package.path, ';')
--- table.insert(runtime_path, "lua/?.lua")
--- table.insert(runtime_path, "lua/?/init.lua")
-
--- require'lspconfig'.sumneko_lua.setup {
---     cmd = {sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua"};
---     settings = {
---         Lua = {
---         runtime = {
---             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
---             version = 'LuaJIT',
---             -- Setup your lua path
---             path = runtime_path,
---         },
---         diagnostics = {
---             -- Get the language server to recognize the `vim` global
---             globals = {'vim'},
---         },
---         workspace = {
---             -- Make the server aware of Neovim runtime files
---             library = vim.api.nvim_get_runtime_file("", true),
---         },
---         -- Do not send telemetry data containing a randomized but unique identifier
---         telemetry = {
---             enable = false,
---         },
---         },
---     },
--- }
-
--- Typescript ls
-local buf_map = function(bufnr, mode, lhs, rhs, opts)
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
-        silent = true,
-    })
-end
-
-require("lspconfig").ts_ls.setup({
-    on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
-        local ts_utils = require("nvim-lsp-ts-utils")
-        ts_utils.setup({})
-        ts_utils.setup_client(client)
-        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-        on_attach(client, bufnr)
-    end,
+vim.lsp.enable({
+  -- lua
+  "luals",
+  -- python
+  "pyright",
+  -- markdown
+  "ltex",
+  -- bash
+  "bashls",
+  "rust-analyzer",
+  "r_language_server"
 })
-
-local null_ls = require("null-ls")
-null_ls.setup({
-    sources = {
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.formatting.prettier
-    },
-    on_attach = on_attach
-})
-
--- C language server
-
-require('lspconfig').clangd.setup {
-        cmd = {
-            "clangd",
-            "--background-index",
-            "--suggest-missing-includes",
-	    "--clang-tidy"
-        },
-        filetypes = {"c", "cpp", "objc", "objcpp"},
-}

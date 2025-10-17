@@ -8,7 +8,7 @@ fi
 
 SETTINGS_DIR=$PWD
  
-sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext curl nodejs npm git
+sudo apt-get install ninja-build make cmake mypy libtool-bin ripgrep clang-format clang-tidy clangd build-essential libssl-dev xclip ruby-dev fd-find gettext curl nodejs npm git bash-language-server
 
 # update node
 npm cache clean -f
@@ -20,6 +20,7 @@ sudo cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf /usr/share/fonts/
 
 mkdir -p ~/.config/nvim/
 ln -s $SETTINGS_DIR/init.lua ~/.config/nvim/init.lua
+ln -s $SETTINGS_DIR/lsp ~/.config/nvim/lsp
 cd -
 # curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 # sudo python2 get-pip.py
@@ -83,19 +84,11 @@ sudo apt install cpanminus
 sudo cpanm -n Neovim::Ext
 cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
-# solidity and lsp
-sudo add-apt-repository ppa:ethereum/ethereum
-sudo apt-get install solc
-npm install -g solidity-language-server
-
-# Typescript
-npm install -g typescript typescript-language-server eslint prettier
-npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
-
 cd $SETTINGS_DIR
 echo ":PackerSync"
 echo ":checkhealth"
 echo "Check that path in $PROFILE is not after cargo/env"
 echo "Install rorboto mono font for the terminal"
 echo "TSInstall <languages> bash c r rust lua json python"
+echo "MasonInstall <languages> bash c r rust lua json python"
 echo "set DISPLAY=:1 in $PROFILE if installed on a remote system to allow xclip"

@@ -2,6 +2,7 @@
 
 mkdir -p ~/.config/nvim/
 ln -s $PWD/init.lua ~/.config/nvim/init.lua
+ln -s $PWD/lsp ~/.config/nvim/lsp
 cp Roboto\ Mono\ Nerd\ Font\ Complete.ttf ~/Library/Fonts/
 cd -
 pip install neovim
@@ -9,6 +10,8 @@ pip install black
 brew install mypy
 brew install black
 brew install ripgrep
+brew install luarocks
+brew install node
 cd
 
 # install packer
@@ -22,9 +25,6 @@ brew install clang-format
 echo 'export PATH="$HOME/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
 echo 'export LDFLAGS="-L/$HOME/homebrew/opt/llvm/lib"' >> ~/.zprofile
 echo 'export CPPFLAGS="-I/$HOME/homebrew/opt/llvm/include"' >> ~/.zprofile
-
-# Go
-brew install gopls
 
 # Python
 sudo npm i -g pyright
@@ -46,7 +46,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Rust
 rustup component add rust-analyzer
-# brew install rust-analyzer
 
 # install rustfmt (for formatting)
 rustup component add rustfmt
@@ -66,16 +65,9 @@ brew install cpanminus
 sudo cpanm -n Neovim::Ext
 sudo cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
-# solidity  and lsp
-brew tap ethereum/ethereum
-brew install solidity
-npm install -g solidity-language-server
-
-# Typescript
-npm install -g typescript typescript-language-server eslint prettier
-
 cd -
 echo ":PackerSync"
 echo "Check that path in .zprofile is not after cargo/env"
 echo "Install roboto font for the terminal"
 echo "TSInstall <languages>"
+echo "MasonInstall <languages> bash c r rust lua json python"
