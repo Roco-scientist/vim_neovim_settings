@@ -18,17 +18,27 @@ info() { printf "${C_BLUE}[INFO]${C_RESET} %s\n" "$1"; }
 success() { printf "${C_GREEN}[SUCCESS]${C_RESET} %s\n" "$1"; }
 warn() { printf "${C_YELLOW}[WARNING]${C_RESET} %s\n" "$1"; }
 
-# Specify the Python version you want to install
+# Specify the Python version
 PYTHON_VERSION="3.14.0"
 
-# Determine the correct profile file
-if [ -n "$ZSH_VERSION" ]; then
-    PROFILE_FILE=~/.zprofile
-elif [ -n "$BASH_VERSION" ]; then
-    PROFILE_FILE=~/.bash_profile
-else
-    PROFILE_FILE=~/.profile
-fi
+current_shell=$(basename "$SHELL")
+PROFILE_FILE=""
+
+case "$current_shell" in
+    zsh)
+        PROFILE_FILE=~/.zprofile
+        ;;
+    bash)
+        PROFILE_FILE=~/.bash_profile
+        ;;
+    *)
+        # Fallback for other shells like sh, dash, etc.
+        warn "Could not detect zsh or bash as the default shell. Falling back to ~/.profile."
+        PROFILE_FILE=~/.profile
+        ;;
+esac
+
+info "Detected shell: ${C_YELLOW}$current_shell${C_RESET}. Using profile file: ${C_YELLOW}$PROFILE_FILE${C_RESET}"
 
 # --- Main Functions ---
 
