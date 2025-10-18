@@ -131,10 +131,17 @@ install_neovim_from_source() {
 setup_neovim_config() {
     info "Linking Neovim configuration files..."
     mkdir -p "$NVIM_CONFIG_DIR"
-    # Use -sf to force link creation, useful for re-running the script
+
     ln -sf "$SCRIPT_DIR/init.lua" "$NVIM_CONFIG_DIR/init.lua"
-    ln -sf "$SCRIPT_DIR/lsp" "$NVIM_CONFIG_DIR/lsp"
-    success "Configuration files linked."
+    success "Linked 'init.lua'."
+
+    local lsp_link_target="$NVIM_CONFIG_DIR/lsp"
+    if [ -d "$lsp_link_target" ] && [ ! -L "$lsp_link_target" ]; then
+        warn "Destination '$lsp_link_target' exists as a directory. Removing it to create a symlink."
+        rm -rf "$lsp_link_target"
+    fi
+    ln -sf "$SCRIPT_DIR/lsp" "$lsp_link_target"
+    success "Linked 'lsp' directory."
 }
 
 install_lazy_nvim() {
