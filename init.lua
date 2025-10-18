@@ -14,15 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  -- NOTE: Plugins are now defined as a list of strings or tables.
-  
   -- Core Plugin Manager
   'folke/lazy.nvim',
 
   -- Git integration
   'tpope/vim-fugitive',        -- Git commands in nvim
   'tpope/vim-rhubarb',         -- Fugitive-companion to interact with github
-  
+
   -- Essential Utilities
   'tpope/vim-commentary',      -- "gc" to comment visual regions/lines
   'nvim-lua/plenary.nvim',     -- A dependency for many plugins
@@ -31,7 +29,7 @@ require("lazy").setup({
   -- UI & Appearance
   {
     "ellisonleao/gruvbox.nvim",
-    priority = 1000, -- Make sure to load this before other plugins
+    priority = 1000,
     config = function()
       -- Set colorscheme here
       vim.o.termguicolors = true
@@ -120,6 +118,22 @@ require("lazy").setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     config = function()
       require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          "c",
+          "lua",
+          "rust",
+          "python",
+          "javascript",
+          "typescript",
+          "html",
+          "css",
+          "bash",
+          "json",
+          "go",
+          "cpp"
+        },
+        sync_install = false, -- Install parsers asynchronously
+        auto_install = true,  -- Automatically install parsers on file open
         highlight = {
           enable = true,
         },
@@ -171,9 +185,73 @@ require("lazy").setup({
     end
   },
 
-  -- LSP, Autocompletion, and Snippets
-  { 'neovim/nvim-lspconfig' }, -- LSP configurations
-  { 'hrsh7th/nvim-cmp', -- Autocompletion engine
+  -- LSP Installer
+  { 'mason-org/mason.nvim',
+    config = function()
+      require("mason").setup()
+    end
+  },
+
+  'williamboman/mason-lspconfig.nvim',
+
+  -- LSP Configurations
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+
+      -- Define the on_attach function that runs for every language server.
+      local on_attach = function(client, bufnr)
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+        local opts = { noremap=true, silent=true }
+        buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+        buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+        buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+        buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+        buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+        buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+        buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+        buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+        buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+      end
+
+      -- Get completion capabilities from nvim-cmp
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      require('mason-lspconfig').setup({
+        -- Mason will automatically install anything in this list that is not already installed.
+        ensure_installed = {
+          "lua_ls",
+          "pyright",
+          "ltex",
+          "rust_analyzer",
+          "r_language_server"
+        },
+        handlers = {
+          function(server_name)
+            require('lspconfig')[server_name].setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+            })
+          end,
+          -- add custom handlers for specific servers here if needed
+          -- For example:
+          -- ["luals"] = function()
+          --   require('lspconfig').luals.setup({ ... custom settings ... })
+          -- end,
+        }
+      })
+    end
+  },
+
+  -- Autocompletion engine
+  { 'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
@@ -196,38 +274,26 @@ require("lazy").setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
+            if cmp.visible() then cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
+            elseif has_words_before() then cmp.complete()
+            else fallback() end
           end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
+            if cmp.visible() then cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then luasnip.jump(-1)
+            else fallback() end
           end, { "i", "s" }),
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-          })
-        },
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        }),
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
@@ -238,12 +304,7 @@ require("lazy").setup({
     end
   },
 
-  -- LSP Installer and null-ls for formatting/linting
-  { 'mason-org/mason.nvim',
-    config = function()
-      require("mason").setup()
-    end
-  },
+  -- null-ls for formatting/linting
   'jose-elias-alvarez/null-ls.nvim',
   'jose-elias-alvarez/nvim-lsp-ts-utils',
 
@@ -267,12 +328,11 @@ require("lazy").setup({
   },
 
   -- Language-specific tools
-  'tomlion/vim-solidity',
   'averms/black-nvim',
   'rhysd/vim-clang-format',
   'darrikonn/vim-gofmt',
 
-  -- AI Plugin (Note: Replaced gp.nvim with avante.nvim as per previous discussion)
+  -- AI Plugin
   {
     'yetone/avante.nvim',
     dependencies = {
@@ -290,11 +350,11 @@ require("lazy").setup({
     run = 'make', -- This command builds the plugin's binary
     config = function()
       require('avante').setup({
-        provider = "claude",
+        provider = "gemini",
         providers = {
-          claude = { model = "claude-3-5-sonnet-20240620" },
-          openai = { model = "gpt-4o" },
-          gemini = { model = "gemini-1.5-flash-latest" }
+          claude = { model = "claude-4-5-sonnet" },
+          openai = { model = "gpt-5-mini" },
+          gemini = { model = "gemini-2.5-flash" }
         },
         behaviour = {
             auto_set_keymaps = true,
@@ -325,6 +385,7 @@ vim.opt.scrolloff = 10
 vim.opt.wrap = false
 vim.wo.cursorline = true
 vim.opt.clipboard = {'unnamed', 'unnamedplus'}
+vim.o.mouse = ""
 
 --[[ ------------------------------------------------------------------------
    Keymaps
@@ -332,6 +393,7 @@ vim.opt.clipboard = {'unnamed', 'unnamedplus'}
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true, silent = true, desc = "Exit insert mode" })
 
 -- Window navigation
 vim.api.nvim_set_keymap('n', '<leader>j', '<C-w>j', { noremap = true, silent = true })
@@ -382,43 +444,4 @@ vim.api.nvim_exec(
   false
 )
 
---[[ ------------------------------------------------------------------------
-   LSP (Language Server Protocol)
-   ------------------------------------------------------------------------ ]]
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local opts = { noremap=true, silent=true }
-
-  -- LSP keymaps
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-
--- This part is a little unusual, but it will work.
--- A more common pattern is to use a plugin like 'mason-lspconfig' to automatically
--- call setup for each server installed via Mason.
--- However, for a direct conversion, this keeps your existing logic.
 vim.diagnostic.config({ virtual_text = true })
-vim.lsp.enable({
-  "luals",
-  "pyright",
-  "ltex",
-  "bashls",
-  "rust-analyzer",
-  "r_language_server"
-})
