@@ -19,17 +19,17 @@ success() { printf "${C_GREEN}[SUCCESS]${C_RESET} %s\n" "$1"; }
 warn() { printf "${C_YELLOW}[WARNING]${C_RESET} %s\n" "$1"; }
 
 # Specify the Python version
-PYTHON_VERSION="3.14.0"
+PYTHON_VERSION="3.14"
 
 current_shell=$(basename "$SHELL")
 PROFILE_FILE=""
 
 case "$current_shell" in
     zsh)
-        PROFILE_FILE=~/.zprofile
+        PROFILE_FILE=~/.zshrc
         ;;
     bash)
-        PROFILE_FILE=~/.bash_profile
+        PROFILE_FILE=~/.bashrc
         ;;
     *)
         # Fallback for other shells like sh, dash, etc.
@@ -38,7 +38,7 @@ case "$current_shell" in
         ;;
 esac
 
-info "Detected shell: ${C_YELLOW}$current_shell${C_RESET}. Using profile file: ${C_YELLOW}$PROFILE_FILE${C_RESET}"
+info "Detected shell: $current_shell. Using profile file: $PROFILE_FILE"
 
 # --- Main Functions ---
 
@@ -47,7 +47,7 @@ check_build_dependencies() {
     # These are required by pyenv to compile Python from source.
     local dependencies=(
         build-essential libssl-dev zlib1g-dev libbz2-dev
-        libreadline-dev libsqlite3-dev curl libncursesw5-dev
+        libreadline-dev libsqlite3-dev curl libncurses-dev
         xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     )
     

@@ -31,9 +31,9 @@ command_exists() { command -v "$1" >/dev/null 2>&1; }
 
 # Determine the correct profile file
 if [ -n "$ZSH_VERSION" ]; then
-    PROFILE_FILE=~/.zprofile
+    PROFILE_FILE=~/.zshrc
 elif [ -n "$BASH_VERSION" ]; then
-    PROFILE_FILE=~/.bash_profile
+    PROFILE_FILE=~/.bashrc
 else
     PROFILE_FILE=~/.profile
 fi
@@ -52,7 +52,7 @@ install_system_dependencies() {
         ninja-build make cmake gettext curl git xclip ruby-dev
         build-essential libssl-dev libtool-bin
         ripgrep fd-find clang-format clangd
-        nodejs npm bash-language-server cpanminus
+        nodejs npm cpanminus
     )
     
     sudo apt-get install -y "${packages[@]}"
@@ -60,19 +60,28 @@ install_system_dependencies() {
 }
 
 install_fonts() {
-    info "Installing Nerd Font..."
-    local font_dir="/usr/local/share/fonts"
+    info "Installing Nerd Font for the current user..."
+    local font_dir="$HOME/.local/share/fonts"
+    
     if [[ ! -f "$SCRIPT_DIR/$FONT_NAME" ]]; then
         warn "Font file '$FONT_NAME' not found in script directory. Skipping."
         return
     fi
     
-    sudo mkdir -p "$font_dir"
-    sudo cp "$SCRIPT_DIR/$FONT_NAME" "$font_dir/"
+    # Create the user's local font directory if it doesn't exist
+    mkdir -p "$font_dir"
     
-    info "Updating font cache..."
-    sudo fc-cache -f -v
-    success "Nerd Font installed."
+    # Copy the font if it's not already there
+    if [ ! -f "$font_dir/$FONT_NAME" ]; then
+        cp "$SCRIPT_DIR/$FONT_NAME" "$font_dir/"
+        info "Font copied to $font_dir."
+        # Update the font cache for the user
+        info "Updating user font cache..."
+        fc-cache -f -v
+    else
+        info "Font is already installed in user's local directory. Skipping."
+    fi
+    success "Nerd Font is ready to be used."
 }
 
 setup_toolchains() {
@@ -109,14 +118,26 @@ setup_toolchains() {
     success "Toolchains and providers are set up."
 }
 
+remove_apt_neovim() {
+    info "Checking for Neovim installation via apt..."
+    # dpkg-query returns a non-zero exit code if the package is not found
+    if dpkg-query -W -f='${Status}' neovim 2>/dev/null | grep -q "install ok installed"; then
+        warn "Found an existing version of Neovim installed via apt. Removing it to avoid conflicts..."
+        sudo apt-get remove --purge -y neovim
+        success "Removed apt version of Neovim."
+    else
+        info "No apt version of Neovim found. Proceeding."
+    fi
+}
+
 install_neovim_from_source() {
-    if command_exists nvim; then
-        info "Neovim is already installed. Skipping build from source."
-        return
+    info "Cloning and building the latest stable Neovim from source..."
+    local neovim_src_dir="$HOME/neovim"
+    # Clean up any old source directory to ensure a fresh clone
+    if [ -d "$neovim_src_dir" ]; then
+        rm -rf "$neovim_src_dir"
     fi
     
-    info "Cloning and building Neovim from source (stable branch)..."
-    local neovim_src_dir="$HOME/neovim"
     git clone https://github.com/neovim/neovim "$neovim_src_dir"
     (
         cd "$neovim_src_dir"
@@ -124,8 +145,8 @@ install_neovim_from_source() {
         make CMAKE_BUILD_TYPE=Release
         sudo make install
     )
-    rm -rf "$neovim_src_dir" # Clean up source directory
-    success "Neovim installed successfully."
+    rm -rf "$neovim_src_dir"
+    success "Latest stable Neovim has been built and installed to /usr/local/bin/nvim."
 }
 
 setup_neovim_config() {
@@ -134,14 +155,6 @@ setup_neovim_config() {
 
     ln -sf "$SCRIPT_DIR/init.lua" "$NVIM_CONFIG_DIR/init.lua"
     success "Linked 'init.lua'."
-
-    local lsp_link_target="$NVIM_CONFIG_DIR/lsp"
-    if [ -d "$lsp_link_target" ] && [ ! -L "$lsp_link_target" ]; then
-        warn "Destination '$lsp_link_target' exists as a directory. Removing it to create a symlink."
-        rm -rf "$lsp_link_target"
-    fi
-    ln -sf "$SCRIPT_DIR/lsp" "$lsp_link_target"
-    success "Linked 'lsp' directory."
 }
 
 install_lazy_nvim() {
@@ -162,11 +175,8 @@ print_final_instructions() {
     info "--- ACTION REQUIRED ---"
     printf "${C_YELLOW}1. Restart your terminal or run 'source %s' to apply changes.${C_RESET}\n" "$PROFILE_FILE"
     info "2. Launch Neovim ('nvim'). lazy.nvim will automatically install your plugins on the first run."
-    info "3. Once plugins are installed, run the following commands inside Neovim:"
-    printf "   - ${C_GREEN}:MasonInstallAll${C_RESET} (to install all configured LSPs, formatters, etc.)\n"
-    printf "   - ${C_GREEN}:TSInstallSync${C_RESET} (to install all configured Tree-sitter parsers)\n"
-    info "4. Change your terminal's font to 'RobotoMono Nerd Font' to see icons correctly."
-    info "5. For a full health check, run ${C_GREEN}:checkhealth${C_RESET} inside Neovim."
+    info "3. Change your terminal's font to 'RobotoMono Nerd Font' to see icons correctly."
+    info "4. For a full health check, run :checkhealth inside Neovim."
     printf "\n"
 }
 
@@ -175,6 +185,7 @@ main() {
     install_system_dependencies
     install_fonts
     setup_toolchains
+    remove_apt_neovim
     install_neovim_from_source
     setup_neovim_config
     install_lazy_nvim
