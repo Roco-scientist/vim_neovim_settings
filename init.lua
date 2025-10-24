@@ -228,7 +228,7 @@ require("lazy").setup({
         -- Mason will automatically install anything in this list that is not already installed.
         ensure_installed = {
           "lua_ls",
-          "pyright",
+          "ruff",
           "ltex",
           "rust_analyzer",
           "r_language_server"
@@ -257,8 +257,14 @@ require("lazy").setup({
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
-      'L3MON4D3/LuaSnip', -- Snippet engine
-      'onsails/lspkind-nvim' -- VSCode-like icons for autocompletion
+      'onsails/lspkind-nvim', -- VSCode-like icons for autocompletion
+      {
+        'L3MON4D3/LuaSnip',
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end
+      },
     },
     config = function()
       local cmp = require('cmp')
