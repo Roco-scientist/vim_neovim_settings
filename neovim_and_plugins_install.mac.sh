@@ -140,7 +140,7 @@ print_final_instructions() {
     printf "${C_YELLOW}1. Restart your terminal or run 'source %s' to apply changes.${C_RESET}\n" "$PROFILE_FILE"
     info "2. Launch Neovim ('nvim'). lazy.nvim will automatically install your plugins."
     info "3. Once plugins are installed, run the following commands inside Neovim:"
-    printf "   - ${C_GREEN}:MasonInstallAll${C_RESET} (to install all configured LSPs, formatters, etc.)\n"
+    printf "   - ${C_GREEN}:MasonInstallAll${C_RESET} (to install all configured LSPs, formatters, etc. prettier, sqlfluff, jsonlint, sql-formatter)\n"
     printf "   - ${C_GREEN}:TSInstallSync${C_RESET} (to install all configured Tree-sitter parsers)\n"
     info "4. Open your terminal preferences and set the font to 'RobotoMono Nerd Font'."
     info "5. For a full health check, run :checkhealth inside Neovim."
