@@ -329,7 +329,7 @@ require("lazy").setup({
         opts = {
             notify_on_error = false,
             format_on_save = {
-                timeout_ms = 500,
+                timeout_ms = 3000,
                 lsp_fallback = true,
             },
             formatters_by_ft = {
@@ -337,7 +337,7 @@ require("lazy").setup({
                 python = { 'ruff' },
                 rust = { 'rustfmt' },
                 json = { 'prettier' },
-                sql = { 'sql_formatter' },
+                sql = { 'sqlfluff' },
                 javascript = { 'prettier' },
                 typescript = { 'prettier' },
                 html = { 'prettier' },
